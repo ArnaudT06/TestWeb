@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Arduino Ajax LED Button Control</title>
+        <script>
+        vari = ""; 
+        function GetArduinoIO()
+        {
+            nocache = "&nocache=" + Math.random() * 1000000;
+            var request = new XMLHttpRequest();
+            request.onreadystatechange = function()
+            {
+                if (this.readyState == 4) {
+                    if (this.status == 200) {
+                        if (this.responseXML != null) {
+                            // XML file received - contains analog values, switch values and LED states
+                            var count;
+                            
+                            if (this.responseXML.getElementsByTagName('POTENTIOMETRE').childNodes[0].nodeValue === "checked") {
+
+				
+                                
+                            }else{
+
+				
+
+			    }
+                            if (this.responseXML.getElementsByTagName('300W').childNodes[0].nodeValue === "checked") {
+
+				document.MODE.300W.checked = true;
+                                
+                            }else{
+
+				document.MODE.300W.checked = false;
+
+			    }
+                            if (this.responseXML.getElementsByTagName('600W').childNodes[0].nodeValue === "checked") {
+
+				document.MODE.600W.checked = true;
+                                
+                            }else{
+
+				document.MODE.600W.checked = false;
+
+			    }
+                            if (this.responseXML.getElementsByTagName('900W').childNodes[0].nodeValue === "checked") {
+
+				document.MODE.900W.checked = true;
+                                
+                            }else{
+
+				document.MODE.900W.checked = false;
+
+			    }
+                            if (this.responseXML.getElementsByTagName('1200W').childNodes[0].nodeValue === "checked") {
+
+				document.MODE.1200W.checked = true;
+                                
+                            }else{
+
+				document.MODE.1200W.checked = false;
+
+			    }
+                            if (this.responseXML.getElementsByTagName('1500W').childNodes[0].nodeValue === "checked") {
+
+				document.MODE.1500W.checked = true;
+                                
+                            }else{
+
+				document.MODE.1500W.checked = false;
+
+			    }
+                            if (this.responseXML.getElementsByTagName('RESET').childNodes[0].nodeValue === "checked") {
+				
+				document.MODE.RESET.checked = true;
+                                
+                            }else{
+
+				document.MODE.RESET.checked = false;
+
+			    }
+                            if (this.responseXML.getElementsByTagName('ON/OFF').childNodes[0].nodeValue === "checked") {
+
+				document.MODE.ON/OFF.checked = true;
+                                
+                            }else{
+
+				document.MODE.ON/OFF.checked = false;
+
+			    }
+
+                        }
+                    }
+                }
+            }
+            // send HTTP GET request with LEDs to switch on/off if any
+            request.open("GET", "ajax_inputs" + vari + nocache, true);
+            request.send(null);
+            setTimeout('GetArduinoIO()', 1000);
+            vari = "";
+        }
+        // service LEDs when checkbox checked/unchecked
+        function GetCheck()
+        {
+            if (MODE.ON/OFF.checked) {
+                	vari=7;
+            }
+            else {
+                	vari=7;
+            }
+        }
+        function GetButton1()
+        {
+		if (300W == 1)
+		{
+			vari=1;
+		}
+        }
+        function GetButton2()
+        {
+		if (600W == 1)
+		{
+			vari=2;
+		}
+        }
+        function GetButton3()
+        {
+		if (900W == 1)
+		{
+			vari=3;
+		}
+        }
+        function GetButton4()
+        {
+		if (1200W == 1)
+		{
+			vari=4;
+		}
+        }
+        function GetButton5()
+        {
+		if (1500W == 1)
+		{
+			vari=5;
+		}
+        }
+        function GetButton6()
+        {
+		if (RESET == 1)
+		{
+			vari=6;
+		}
+        }
+
+    </script>
+    <style>
+
+        h1 {
+            font-size: 300%;
+            color: blue;
+            margin: 100 0 10px 0;
+        }
+        h2 {
+            font-size: 85%;
+            color: black;
+            margin: 5px 0 5px 0;
+        }
+        p, form, button {
+            font-size: 80%;
+            color: black;
+        }
+        .small_text {
+            font-size: 70%;
+            color: black;
+        }
+    </style>
+    </head>
+    <body onload="GetArduinoIO()">
+        <h1>Banc de Test</h1>
+        <div class="IO_box">
+            <h2>ON/OFF</h2>
+            <form id="check_MODE" name="MODE">
+                <input type="checkbox" name="ON/OFF" value="0" onclick="GetCheck()" />ON <br /><br />
+            </form>
+        </div>
+        <div class="IO_box">
+            <h2>FONCTIONNEMENT</h2>
+	    <button type="button" id="POTENTIOMETRE" onclick="GetButton0()">POTENTIOMETRE</button><br /><br />
+            <button type="button" id="300w" onclick="GetButton1()">300W</button><br /><br />
+            <button type="button" id="600w" onclick="GetButton2()">600W</button><br /><br />
+            <button type="button" id="900w" onclick="GetButton3()">900W</button><br /><br />
+            <button type="button" id="1200w" onclick="GetButton4()">1200W</button><br /><br />
+            <button type="button" id="1500w" onclick="GetButton5()">1500W</button><br /><br />
+            <button type="button" id="RESET" onclick="GetButton6()">RESET</button><br /><br />
+
+        </div>
+    </body>
+</html>
